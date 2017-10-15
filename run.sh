@@ -217,6 +217,10 @@ do
         docker ps | grep -q "$img" >> /dev/null || docker rmi $img 2>/dev/null;
     done
 
+    echo "Running PatientSky Rkt Image cleanup"
+    which rkt > /dev/null 2>1 && rkt gc
+    which rkt > /dev/null 2>1 && rkt image gc
+
     # Run forever or exit after the first run depending on the value of $LOOP
     [ "${LOOP}" == "true" ] || break
 
