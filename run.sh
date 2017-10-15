@@ -221,6 +221,9 @@ do
     which rkt > /dev/null 2>1 && rkt gc
     which rkt > /dev/null 2>1 && rkt image gc
 
+    echo "Running PatientSky Journal cleanup"
+    which journalctl > /dev/null 2>1 && journalctl --vacuum-time=1d
+
     # Run forever or exit after the first run depending on the value of $LOOP
     [ "${LOOP}" == "true" ] || break
 
